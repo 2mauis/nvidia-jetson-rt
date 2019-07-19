@@ -32,8 +32,11 @@ $ source environment
 $ mkdir -p $TEGRA_KERNEL_OUT
 $ cd $HOME/nvidia/kernel/kernel-4.4
 # list and apply real-time patches
-$ for i in rt-patches/*.patch; do echo $i; done
-$ for i in rt-patches/*.patch; do patch -p1 < $i; done
+#$ for i in rt-patches/*.patch; do echo $i; done
+#$ for i in rt-patches/*.patch; do patch -p1 < $i; done
+wget https://cdn.kernel.org/pub/linux/kernel/projects/rt/4.9/patches-4.9.178-rt131.tar.gz
+
+$xzcat path/to/patches-4.9.178-rt131.tar.gz | patch -p1
 # create default config
 $ make O=$TEGRA_KERNEL_OUT ARCH=$ARCH tegra18_defconfig
 # change CONFIG_LOCALVERSION="-rt", "CONFIG_HZ_1000=y" and  CONFIG_PREEMPT_RT_FULL=y for real-time scheduling
